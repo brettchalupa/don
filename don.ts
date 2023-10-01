@@ -5,7 +5,7 @@ interface DonConfig {
   accessToken: string;
 }
 
-const version = "0.1.0";
+import project from "./project.json" with { type: "json" };
 
 const configLocation = Deno.env.get("HOME") + "/.don.json";
 
@@ -81,7 +81,7 @@ switch (command) {
   case "-v":
   case "--version":
   case "version": {
-    console.log("don", version);
+    console.log("don", project.version);
     break;
   }
   default: {
