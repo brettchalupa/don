@@ -89,6 +89,7 @@ switch (command) {
       console.log(`Command ${command} not recongnized\n`);
     }
     console.log("don is a simple CLI for interacting with Mastodon.");
+    console.log("Configuration is stored at", configLocation);
     console.log('Create a post with:\n\tdon post "Hello, world!"');
     console.log("Sign out with:\n\tdon signout");
     console.log("Get the version with:\n\tdon version");
