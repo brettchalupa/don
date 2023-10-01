@@ -5,6 +5,8 @@ interface DonConfig {
   accessToken: string;
 }
 
+const version = "0.1.0";
+
 const configLocation = Deno.env.get("HOME") + "/.don.json";
 
 let config: DonConfig = {
@@ -66,21 +68,30 @@ async function post(content: string) {
 
 const command = Deno.args[0];
 
-if (command === undefined) {
-  console.log("don is a simple CLI for interacting with Mastodon.");
-  console.log('Create a post with:\n\tdon post "Hello, world!"');
-  console.log("Sign out with:\n\tdon signout");
-} else {
-  switch (command) {
-    case "signout": {
-      signout();
-      break;
+switch (command) {
+  case "signout": {
+    signout();
+    break;
+  }
+  case "post":
+  case "p": {
+    await post(Deno.args[1]);
+    break;
+  }
+  case "-v":
+  case "--version":
+  case "version": {
+    console.log("don", version);
+    break;
+  }
+  default: {
+    if (command) {
+      console.log(`Command ${command} not recongnized\n`);
     }
-    case "post":
-    case "p": {
-      await post(Deno.args[1]);
-      break;
-    }
+    console.log("don is a simple CLI for interacting with Mastodon.");
+    console.log('Create a post with:\n\tdon post "Hello, world!"');
+    console.log("Sign out with:\n\tdon signout");
+    console.log("Get the version with:\n\tdon version");
   }
 }
 
